@@ -1,6 +1,7 @@
 const User = require("../model/userSchema.model");
 const express = require("express");
 const Router = express.Router();
+
 const jwt = require("jsonwebtoken");
 
 Router.post("/register", async(req,res)=>{
@@ -41,13 +42,19 @@ Router.post("/login", async(req,res)=>{
      
      const ispresent = await User.findOne({email});
 
+
+
+
+
+
+     
      if(!ispresent)
      {
         return res.send("user is not registered")
      }
-      if(password !== ispresent.password){
-        res.send("invalid password");
-      }
+    
+
+     
 const payload = {userId: ispresent._id, role:ispresent.role};
       const token = jwt.sign(payload, "BobiG",
       {expiresIn:"2h"});
